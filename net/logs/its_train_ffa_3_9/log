@@ -1,0 +1,54 @@
+PS F:\PythonWorkSpace\FAA-NET(GPU)\net> python main.py --net='ffa' --crop --crop_size=120 --blocks=9 --gps=3 --bs=2 --lr=0.0001 --trainset='its_train' --testset='its_test' --steps=100 --eval_step=10
+Namespace(blocks=9, bs=2, crop=True, crop_size=120, device='cuda', eval_step=10, gps=3, lr=0.0001, model_dir='./trained_models/its_train_ffa_3_9.pk', net='ffa', no_lr_sche=False, perloss=False, resume=True, steps=100, testset='its_t
+est', trainset='its_train')
+model_dir: ./trained_models/its_train_ffa_3_9.pk
+2
+F:\PythonWorkSpace\FAA-NET(GPU)\net
+crop size 120
+crop size whole img
+log_dir : logs/its_train_ffa_3_9
+model_name: its_train_ffa_3_9
+resume from ./trained_models/its_train_ffa_3_9.pk
+start_step:10 start training ---
+train loss : 0.29600| step :20/100|lr :0.0000905 |time_used :0.1
+
+testing: 499/500
+step :20 |ssim:0.4850| psnr:14.9065
+
+ model saved at step :20| max_psnr:14.9065|max_ssim:0.4850
+train loss : 0.33131| step :30/100|lr :0.0000794 |time_used :3.8
+
+testing: 499/500
+step :30 |ssim:0.5156| psnr:10.4899
+train loss : 0.30130| step :40/100|lr :0.0000655 |time_used :7.5
+
+testing: 499/500
+step :40 |ssim:0.5705| psnr:14.4329
+train loss : 0.18682| step :50/100|lr :0.0000500 |time_used :11.2
+
+testing: 499/500
+step :50 |ssim:0.6054| psnr:16.3114
+
+ model saved at step :50| max_psnr:16.3114|max_ssim:0.6054
+train loss : 0.07973| step :60/100|lr :0.0000345 |time_used :15.0
+
+testing: 499/500
+step :60 |ssim:0.6157| psnr:15.5868
+train loss : 0.19147| step :70/100|lr :0.0000206 |time_used :18.7
+
+testing: 499/500
+step :70 |ssim:0.6164| psnr:15.9493
+train loss : 0.22186| step :80/100|lr :0.0000095 |time_used :22.4
+
+testing: 499/500
+step :80 |ssim:0.6272| psnr:16.6654
+
+ model saved at step :80| max_psnr:16.6654|max_ssim:0.6272
+train loss : 0.15057| step :90/100|lr :0.0000024 |time_used :26.2
+
+testing: 499/500
+step :90 |ssim:0.6310| psnr:16.2844
+train loss : 0.11871| step :100/100|lr :0.0000000 |time_used :29.9
+
+testing: 499/500
+step :100 |ssim:0.6276| psnr:16.1368

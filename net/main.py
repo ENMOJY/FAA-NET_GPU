@@ -126,22 +126,14 @@ def test(net, loader_test, max_psnr, max_ssim, step):
     # s=True
     print("\n")
     for i, (inputs, targets) in enumerate(loader_test):
-        print(f'testing: {i+1}/500', end='\r', flush=True)
+        print(f'testing: {i + 1}/500', end='\r', flush=True)
         inputs = inputs.to(opt.device)
         targets = targets.to(opt.device)
         pred = net(inputs)
-        # print(pred)
-        # tfs.ToPILImage()(torch.squeeze(targets.cpu())).save('111.png')
-        # vutils.save_image(targets.cpu(),'target.png')
-        # vutils.save_image(pred.cpu(),'pred.png')
         ssim1 = ssim(pred, targets).item()
         psnr1 = psnr(pred, targets)
         ssims.append(ssim1)
         psnrs.append(psnr1)
-    # if (psnr1>max_psnr or ssim1 > max_ssim) and s :
-    #		ts=vutils.make_grid([torch.squeeze(inputs.cpu()),torch.squeeze(targets.cpu()),torch.squeeze(pred.clamp(0,1).cpu())])
-    #		vutils.save_image(ts,f'samples/{model_name}/{step}_{psnr1:.4}_{ssim1:.4}.png')
-    #		s=False
     return np.mean(ssims), np.mean(psnrs)
 
 
