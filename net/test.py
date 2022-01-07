@@ -28,19 +28,19 @@ def tensorShow(tensors, titles=['haze']):
 parser = argparse.ArgumentParser()
 parser.add_argument('--task', type=str, default='its', help='its or ots')
 parser.add_argument('--test_imgs', type=str, default='test_imgs', help='Test imgs folder')
+parser.add_argument('--gps', type=int, default=3, help='residual_groups')
+parser.add_argument('--blocks', type=int, default=20, help='residual_blocks')
 opt = parser.parse_args()
 dataset = opt.task
-gps = 3
-blocks = 19
 img_dir = abs + opt.test_imgs + '/'
 output_dir = abs + f'pred_FFA_{dataset}/'
 print("pred_dir:", output_dir)
 if not os.path.exists(output_dir):
     os.mkdir(output_dir)
-model_dir = abs + f'net/trained_models/{dataset}_train_ffa_{gps}_{blocks}.pk'
+model_dir = abs + f'net/trained_models/{dataset}_train_ffa_{opt.gps}_{opt.blocks}.pk'
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 ckp = torch.load(model_dir, map_location=device)
-net = FFA(gps=gps, blocks=blocks)
+net = FFA(gps=opt.gps, blocks=opt.blocks)
 net = nn.DataParallel(net)
 net.load_state_dict(ckp['model'])
 net.eval()

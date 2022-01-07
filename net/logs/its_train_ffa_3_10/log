@@ -1,0 +1,56 @@
+Namespace(blocks=10, bs=2, crop=True, crop_size=200, device='cuda', eval_step=100, gps=3, lr=0.0001, model_dir='./trained_models/its_train_ffa_3_10.pk', net='ffa', no_lr_sche=False, perloss=False, resume=True, steps=1000, testset='its_test', trainset='its_train')
+model_dir: ./trained_models/its_train_ffa_3_10.pk
+2
+F:\PythonWorkSpace\FAA-NET(GPU)\net
+crop size 200
+crop size whole img
+log_dir : logs/its_train_ffa_3_10
+model_name: its_train_ffa_3_10
+train from scratch ***
+train loss : 0.15977| step :100/1000|lr :0.0000976 |time_used :1.0
+     |
+     +---testing: 500/500
+     +---step :100 |ssim:0.6523| psnr:16.7616
+     +---model saved at step :100| max_psnr:16.7616|max_ssim:0.6523
+train loss : 0.17894| step :200/1000|lr :0.0000905 |time_used :6.0
+     |
+     +---testing: 500/500
+     +---step :200 |ssim:0.6550| psnr:16.9049
+     +---model saved at step :200| max_psnr:16.9049|max_ssim:0.6550
+train loss : 0.17828| step :300/1000|lr :0.0000794 |time_used :11.0
+     |
+     +---testing: 500/500
+     +---step :300 |ssim:0.6861| psnr:16.9646
+     +---model saved at step :300| max_psnr:16.9646|max_ssim:0.6861
+train loss : 0.11356| step :400/1000|lr :0.0000655 |time_used :16.0
+     |
+     +---testing: 500/500
+     +---step :400 |ssim:0.7237| psnr:17.9187
+     +---model saved at step :400| max_psnr:17.9187|max_ssim:0.7237
+train loss : 0.10210| step :500/1000|lr :0.0000500 |time_used :21.0
+     |
+     +---testing: 500/500
+     +---step :500 |ssim:0.7556| psnr:19.0794
+     +---model saved at step :500| max_psnr:19.0794|max_ssim:0.7556
+train loss : 0.11342| step :600/1000|lr :0.0000345 |time_used :26.0
+     |
+     +---testing: 500/500
+     +---step :600 |ssim:0.7482| psnr:18.9168
+train loss : 0.25616| step :700/1000|lr :0.0000206 |time_used :31.2
+     |
+     +---testing: 500/500
+     +---step :700 |ssim:0.7599| psnr:17.7287
+train loss : 0.10404| step :800/1000|lr :0.0000095 |time_used :36.2
+     |
+     +---testing: 500/500
+     +---step :800 |ssim:0.7738| psnr:19.1882
+     +---model saved at step :800| max_psnr:19.1882|max_ssim:0.7738
+train loss : 0.12273| step :900/1000|lr :0.0000024 |time_used :41.2
+     |
+     +---testing: 500/500
+     +---step :900 |ssim:0.7773| psnr:18.7282
+train loss : 0.07310| step :1000/1000|lr :0.0000000 |time_used :46.2
+     |
+     +---testing: 500/500
+     +---step :1000 |ssim:0.7718| psnr:18.7388
+train finished.

@@ -1,1 +1,1 @@
-reside(https://sites.google.com/view/reside-dehaze-datasets/reside-standard)
+数据集下载[reside](https://sites.google.com/view/reside-dehaze-datasets/reside-standard)

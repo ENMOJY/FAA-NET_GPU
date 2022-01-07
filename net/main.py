@@ -3,11 +3,11 @@ import time
 from torch import optim, nn
 from torch.backends import cudnn
 from models import *
-
-warnings.filterwarnings('ignore')
 from option import model_name, log_dir
 from data_utils import *
 from torchvision.models import vgg16
+
+warnings.filterwarnings('ignore')
 
 print('log_dir :', log_dir)
 print('model_name:', model_name)
@@ -65,31 +65,16 @@ def train(net, loader_train, loader_test, optim, criterion):
             loss = loss + 0.04 * loss2
 
         loss.backward()
-
         optim.step()
         optim.zero_grad()
         losses.append(loss.item())
         print(
             f'\rtrain loss : {loss.item():.5f}| step :{step}/{opt.steps}|lr :{lr :.7f} |time_used :{(time.time() - start_time) / 60 :.1f}',
             end='\r', flush=True)
-
-        # with SummaryWriter(logdir=log_dir,comment=log_dir) as writer:
-        #	writer.add_scalar('data/loss',loss,step)
-
         if step % opt.eval_step == 0:
             with torch.no_grad():
-                ssim_eval, psnr_eval = test(net, loader_test, max_psnr, max_ssim, step)
-
+                ssim_eval, psnr_eval = test(net, loader_test)
             print(f'\n     +---step :{step} |ssim:{ssim_eval:.4f}| psnr:{psnr_eval:.4f}')
-
-            # with SummaryWriter(logdir=log_dir,comment=log_dir) as writer:
-            # 	writer.add_scalar('data/ssim',ssim_eval,step)
-            # 	writer.add_scalar('data/psnr',psnr_eval,step)
-            # 	writer.add_scalars('group',{
-            # 		'ssim':ssim_eval,
-            # 		'psnr':psnr_eval,
-            # 		'loss':loss
-            # 	},step)
             ssims.append(ssim_eval)
             psnrs.append(psnr_eval)
             if ssim_eval > max_ssim and psnr_eval > max_psnr:
@@ -112,12 +97,11 @@ def train(net, loader_train, loader_test, optim, criterion):
     print("train finished.\n")
 
 
-def test(net, loader_test, max_psnr, max_ssim, step):
+def test(net, loader_test):
     net.eval()
     torch.cuda.empty_cache()
     ssims = []
     psnrs = []
-    # s=True
     print('\n     |')
     for i, (inputs, targets) in enumerate(loader_test):
         print(f'\r     +---testing: {i + 1}/500', end='', flush=True)
@@ -139,8 +123,7 @@ if __name__ == "__main__":
     if opt.device == 'cuda':
         net = torch.nn.DataParallel(net)
         cudnn.benchmark = True
-    criterion = []
-    criterion.append(nn.L1Loss().to(opt.device))
+    criterion = [nn.L1Loss().to(opt.device)]
     if opt.perloss:
         vgg_model = vgg16(pretrained=True).features[:16]
         vgg_model = vgg_model.to(opt.device)
