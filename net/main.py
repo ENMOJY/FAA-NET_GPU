@@ -1,18 +1,11 @@
-import torch, os, sys, torchvision, argparse
-import torchvision.transforms as tfs
-from metrics import psnr, ssim
-from models import *
-import time, math
-import numpy as np
+import warnings
+import time
+from torch import optim, nn
 from torch.backends import cudnn
-from torch import optim
-import torch, warnings
-from torch import nn
-# from tensorboardX import SummaryWriter
-import torchvision.utils as vutils
+from models import *
 
 warnings.filterwarnings('ignore')
-from option import opt, model_name, log_dir
+from option import model_name, log_dir
 from data_utils import *
 from torchvision.models import vgg16
 
@@ -87,7 +80,7 @@ def train(net, loader_train, loader_test, optim, criterion):
             with torch.no_grad():
                 ssim_eval, psnr_eval = test(net, loader_test, max_psnr, max_ssim, step)
 
-            print(f'\nstep :{step} |ssim:{ssim_eval:.4f}| psnr:{psnr_eval:.4f}')
+            print(f'\n     +---step :{step} |ssim:{ssim_eval:.4f}| psnr:{psnr_eval:.4f}')
 
             # with SummaryWriter(logdir=log_dir,comment=log_dir) as writer:
             # 	writer.add_scalar('data/ssim',ssim_eval,step)
@@ -111,11 +104,12 @@ def train(net, loader_train, loader_test, optim, criterion):
                     'losses': losses,
                     'model': net.state_dict()
                 }, opt.model_dir)
-                print(f'\n model saved at step :{step}| max_psnr:{max_psnr:.4f}|max_ssim:{max_ssim:.4f}')
+                print(f'     +---model saved at step :{step}| max_psnr:{max_psnr:.4f}|max_ssim:{max_ssim:.4f}\n')
 
     np.save(f'./numpy_files/{model_name}_{opt.steps}_losses.npy', losses)
     np.save(f'./numpy_files/{model_name}_{opt.steps}_ssims.npy', ssims)
     np.save(f'./numpy_files/{model_name}_{opt.steps}_psnrs.npy', psnrs)
+    print("train finished.\n")
 
 
 def test(net, loader_test, max_psnr, max_ssim, step):
@@ -124,9 +118,9 @@ def test(net, loader_test, max_psnr, max_ssim, step):
     ssims = []
     psnrs = []
     # s=True
-    print("\n")
+    print('\n     |')
     for i, (inputs, targets) in enumerate(loader_test):
-        print(f'testing: {i + 1}/500', end='\r', flush=True)
+        print(f'\r     +---testing: {i + 1}/500', end='', flush=True)
         inputs = inputs.to(opt.device)
         targets = targets.to(opt.device)
         pred = net(inputs)

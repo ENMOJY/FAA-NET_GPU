@@ -1,12 +1,11 @@
+import sys
+
 import torch.utils.data as data
 import torchvision.transforms as tfs
 from torchvision.transforms import functional as FF
-import os, sys
 
 sys.path.append('.')
 sys.path.append('..')
-import numpy as np
-import torch
 import random
 from PIL import Image
 from torch.utils.data import DataLoader
